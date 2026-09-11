@@ -1,0 +1,349 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+body {
+    padding-top: 72px;
+    font-family: Arial, sans-serif;
+}
+
+.hero-section {
+    background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        #f4f7ff 100%
+    );
+}
+.hero-section {
+    background: linear-gradient(
+        135deg,
+        #efeff1 0%,
+        #dedfdf 50%,
+        #cddcf3 100%
+    );
+
+    min-height: 100vh;
+}
+
+
+
+
+
+.profile-circle {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    border: 10px solid #e9efff;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.10);
+}
+
+.profile-circle span {
+    font-size: 80px;
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+.navbar {
+    min-height: 72px;
+}
+
+.navbar-brand {
+    letter-spacing: 1px;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #0d6efd !important;
+}
+
+/* =========================================
+   Navigation Animation
+========================================= */
+
+.navbar-nav .nav-item {
+    opacity: 0;
+    transform: translateY(-15px);
+    animation: navFadeIn 0.5s ease forwards;
+}
+
+/* One-by-one delay */
+
+.navbar-nav .nav-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.navbar-nav .nav-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.navbar-nav .nav-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.navbar-nav .nav-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.navbar-nav .nav-item:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.navbar-nav .nav-item:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+.navbar-nav .nav-item:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+.navbar-nav .nav-item:nth-child(8) {
+    animation-delay: 0.8s;
+}
+
+.navbar-nav .nav-item:nth-child(9) {
+    animation-delay: 0.9s;
+}
+
+@keyframes navFadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+/* =========================================================
+   PROFESSIONAL PORTFOLIO SECTIONS
+========================================================= */
+
+.portfolio-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.portfolio-section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-section {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+}
+
+.min-vh-75 {
+    min-height: 75vh;
+}
+
+.section-heading {
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.skill-card,
+.project-card {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.skill-card:hover,
+.project-card:hover {
+    transform: translateY(-6px);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    scroll-margin-top: 80px;
+}
+.profile-image {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    border: 5px solid #ffffff;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.profile-placeholder {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background: #f1f3f5;
+    font-size: 60px;
+    font-weight: 700;
+}
+.about-profile-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    border: 5px solid #ffffff;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.about-profile-placeholder {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background: #f1f3f5;
+    font-size: 60px;
+    font-weight: 700;
+}
+.about-page-profile-image {
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    border: 6px solid #ffffff;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.about-page-profile-placeholder {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background: #f1f3f5;
+    font-size: 65px;
+    font-weight: 700;
+}
+
+.company-logo {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+#experience {
+    background-color: #c4d5ef;
+}
+#experience .card {
+    background-color: #8f6e6e;
+}
+
+.cv-section {
+    background: linear-gradient(
+        135deg,
+        #efeff1 0%,
+        #dedfdf 50%,
+        #cddcf3 100%
+    );
+
+    min-height: 100vh;
+}
+/
+/* ================================
+   CV PAGE
+================================ */
+
+
+.cv-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.cv-header {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.cv-actions {
+    margin-top: 25px;
+}
+
+.cv-actions .btn {
+    padding: 10px 20px;
+    font-weight: 500;
+}
+
+.cv-preview {
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.cv-preview iframe {
+    display: block;
+    width: 100%;
+    min-height: 1000px;
+}
+
+.cv-preview-fallback {
+    border-top: 1px solid #eeeeee;
+    background-color: #ffffff;
+}
+.interest-icon i {
+    font-size: 1.4rem;
+}
+.about-section,
+.skills-section,
+.projects-section,
+.experience-section,
+.education-section,
+.certifications-section,
+.technology-section,
+.cv-section,
+.contact-section {
+    background: transparent;
+}
+.education-section {
+    background: linear-gradient(
+        135deg,
+        #efeff1 0%,
+        #dedfdf 50%,
+        #cddcf3 100%
+    );
+
+    min-height: 100vh;
+}
