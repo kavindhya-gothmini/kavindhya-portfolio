@@ -4,7 +4,7 @@
 
         {{-- Logo / Name --}}
         <a class="navbar-brand fw-bold" href="{{ route('home') }}">
-            Kavindhya Gothmini
+            Kavindhya Gothmini 
         </a>
 
 
