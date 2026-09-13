@@ -1289,42 +1289,37 @@
 
                     {{-- QUICK LINKS --}}
 
-                    <div class="home-hero-links">
+                    
+{{-- QUICK LINKS --}}
 
-                        @if($profile && $profile->linkedin_url)
+<div class="home-hero-links">
 
-                            <a
-                                href="{{ $profile->linkedin_url }}"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
+    {{-- LINKEDIN --}}
+    @if($profile && $profile->linkedin_url)
 
-                                <i class="bi bi-linkedin"></i>
+        @php
+            $linkedinUrl = trim($profile->linkedin_url);
 
-                                LinkedIn
+            if (!preg_match('/^https?:\/\//i', $linkedinUrl)) {
+                $linkedinUrl = 'https://' . $linkedinUrl;
+            }
+        @endphp
 
-                            </a>
+        <a
+            href="{{ $linkedinUrl }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit my LinkedIn profile"
+        >
+            <i class="bi bi-linkedin"></i>
+            LinkedIn
+        </a>
 
-                        @endif
+    @endif
+
+</div>
 
 
-                        @if($profile && $profile->github_url)
-
-                            <a
-                                href="{{ $profile->github_url }}"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-
-                                <i class="bi bi-github"></i>
-
-                                GitHub
-
-                            </a>
-
-                        @endif
-
-                    </div>
 
 
                 </div>
