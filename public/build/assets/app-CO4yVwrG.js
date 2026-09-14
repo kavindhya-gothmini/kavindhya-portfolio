@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",()=>{const s=document.querySelectorAll(".portfolio-section"),t=new IntersectionObserver(e=>{e.forEach(o=>{o.isIntersecting&&(o.target.classList.add("show"),t.unobserve(o.target))})},{threshold:.15});s.forEach(e=>{t.observe(e)})});
