@@ -143,6 +143,95 @@
 
 
 /* =========================================================
+   PROJECT IMAGE CAROUSEL
+========================================================= */
+
+.project-carousel {
+    width: 100%;
+    height: 100%;
+}
+
+.project-carousel .carousel-inner,
+.project-carousel .carousel-item {
+    width: 100%;
+    height: 100%;
+}
+
+.project-carousel .carousel-item img {
+    width: 100%;
+    height: 210px;
+
+    object-fit: cover;
+}
+
+.project-carousel .carousel-control-prev,
+.project-carousel .carousel-control-next {
+    width: 42px;
+    height: 42px;
+
+    top: 50%;
+    transform: translateY(-50%);
+
+    margin: 0 10px;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    border-radius: 50%;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.25s ease,
+        background 0.25s ease;
+}
+
+.project-card:hover .project-carousel .carousel-control-prev,
+.project-card:hover .project-carousel .carousel-control-next {
+    opacity: 1;
+}
+
+.project-carousel .carousel-control-prev:hover,
+.project-carousel .carousel-control-next:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.project-carousel .carousel-indicators {
+    margin-bottom: 10px;
+}
+
+.project-carousel .carousel-indicators button {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.project-carousel .carousel-caption {
+    bottom: 5px;
+
+    padding: 6px 12px;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    border-radius: 6px;
+
+    width: fit-content;
+    max-width: 80%;
+
+    margin: 0 auto;
+}
+
+.project-carousel .carousel-caption p {
+    margin: 0;
+
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
    IMAGE PLACEHOLDER
 ========================================================= */
 
@@ -193,6 +282,8 @@
 
     box-shadow:
         0 5px 15px rgba(0, 0, 0, 0.15);
+
+    z-index: 10;
 }
 
 
@@ -429,6 +520,10 @@
         height: 200px;
     }
 
+    .project-carousel .carousel-item img {
+        height: 200px;
+    }
+
     .project-content {
         padding: 20px;
     }
@@ -439,6 +534,11 @@
 
     .project-btn {
         width: 100%;
+    }
+
+    .project-carousel .carousel-control-prev,
+    .project-carousel .carousel-control-next {
+        opacity: 1;
     }
 }
 
@@ -512,13 +612,138 @@
                         <div class="project-image-wrapper">
 
 
-                            @if($project->featured_image)
+                            {{-- =================================================
+                                 MULTIPLE PROJECT IMAGES
+                            ================================================== --}}
+
+                            @if($project->images->count() > 0)
+
+                                <div
+                                    id="projectCarousel{{ $project->id }}"
+                                    class="carousel slide project-carousel"
+                                    data-bs-ride="carousel"
+                                >
+
+                                    {{-- Carousel Images --}}
+
+                                    <div class="carousel-inner">
+
+
+                                        @foreach($project->images as $index => $projectImage)
+
+                                            <div
+                                                class="carousel-item {{ $index === 0 ? 'active' : '' }}"
+                                            >
+
+                                                <img
+                                                    src="{{ asset('storage/' . $projectImage->image_path) }}"
+                                                    alt="{{ $projectImage->caption ?: $project->title }}"
+                                                    class="d-block w-100 project-image"
+                                                >
+
+
+                                                {{-- Image Caption --}}
+
+                                                @if($projectImage->caption)
+
+                                                    <div class="carousel-caption d-none d-md-block">
+
+                                                        <p>
+                                                            {{ $projectImage->caption }}
+                                                        </p>
+
+                                                    </div>
+
+                                                @endif
+
+                                            </div>
+
+                                        @endforeach
+
+
+                                    </div>
+
+
+                                    {{-- =================================================
+                                         CAROUSEL INDICATORS
+                                    ================================================== --}}
+
+                                    @if($project->images->count() > 1)
+
+                                        <div class="carousel-indicators">
+
+                                            @foreach($project->images as $index => $projectImage)
+
+                                                <button
+                                                    type="button"
+                                                    data-bs-target="#projectCarousel{{ $project->id }}"
+                                                    data-bs-slide-to="{{ $index }}"
+                                                    class="{{ $index === 0 ? 'active' : '' }}"
+                                                    aria-current="{{ $index === 0 ? 'true' : 'false' }}"
+                                                    aria-label="Slide {{ $index + 1 }}"
+                                                ></button>
+
+                                            @endforeach
+
+                                        </div>
+
+
+                                        {{-- Previous Button --}}
+
+                                        <button
+                                            class="carousel-control-prev"
+                                            type="button"
+                                            data-bs-target="#projectCarousel{{ $project->id }}"
+                                            data-bs-slide="prev"
+                                        >
+
+                                            <span class="carousel-control-prev-icon"></span>
+
+                                            <span class="visually-hidden">
+                                                Previous
+                                            </span>
+
+                                        </button>
+
+
+                                        {{-- Next Button --}}
+
+                                        <button
+                                            class="carousel-control-next"
+                                            type="button"
+                                            data-bs-target="#projectCarousel{{ $project->id }}"
+                                            data-bs-slide="next"
+                                        >
+
+                                            <span class="carousel-control-next-icon"></span>
+
+                                            <span class="visually-hidden">
+                                                Next
+                                            </span>
+
+                                        </button>
+
+                                    @endif
+
+                                </div>
+
+
+                            {{-- =================================================
+                                 FALLBACK TO FEATURED IMAGE
+                            ================================================== --}}
+
+                            @elseif($project->featured_image)
 
                                 <img
                                     src="{{ asset('storage/' . $project->featured_image) }}"
                                     alt="{{ $project->title }}"
                                     class="project-image"
                                 >
+
+
+                            {{-- =================================================
+                                 IMAGE PLACEHOLDER
+                            ================================================== --}}
 
                             @else
 
@@ -535,7 +760,9 @@
                             @endif
 
 
-                            {{-- Featured Badge --}}
+                            {{-- =================================================
+                                 FEATURED BADGE
+                            ================================================== --}}
 
                             @if($project->is_featured)
 
@@ -756,3 +983,4 @@
 </section>
 
 @endsection
+

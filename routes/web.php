@@ -1,8 +1,10 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\ProjectImageController;
 
 Route::get('/', [HomeController::class, 'index'])
     ->name('home');
@@ -14,9 +16,12 @@ Route::get('/about', function () {
     return view('public.about', compact('profile'));
 
 })->name('about');
+
+
 Route::get('/skills', function () {
 
-    $skills = \App\Models\Skill::orderBy('proficiency', 'desc')->get();
+    $skills = \App\Models\Skill::orderBy('proficiency', 'desc')
+        ->get();
 
     return view('public.skills', compact('skills'));
 
@@ -26,6 +31,7 @@ Route::get('/skills', function () {
 Route::get('/projects', function () {
 
     $projects = \App\Models\Project::where('is_published', true)
+        ->with('images')
         ->latest()
         ->get();
 
@@ -44,6 +50,7 @@ Route::get('/experience', function () {
 
 })->name('experience');
 
+
 Route::get('/education', function () {
 
     $education = \App\Models\Education::orderByDesc('end_date')
@@ -52,7 +59,6 @@ Route::get('/education', function () {
     return view('public.education', compact('education'));
 
 })->name('education');
-
 
 
 Route::get('/certifications', function () {
@@ -65,19 +71,48 @@ Route::get('/certifications', function () {
 
 })->name('certifications');
 
+
 Route::get('/technology', function () {
+
     return view('public.technology');
+
 })->name('technology');
 
+
 Route::get('/contact', function () {
+
     return view('public.contact');
+
 })->name('contact');
+
 
 Route::post('/contact', [ContactController::class, 'send'])
     ->name('contact.send');
 
-    Route::get('/cv', function () {
+
+Route::get('/cv', function () {
+
     $profile = \App\Models\Profile::first();
 
     return view('public.cv', compact('profile'));
+
 })->name('cv');
+
+
+/*
+|--------------------------------------------------------------------------
+| Project Images
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/admin/projects/{project}/images', [
+    ProjectImageController::class,
+    'store'
+])->name('admin.projects.images.store');
+
+
+Route::delete('/admin/project-images/{projectImage}', [
+    ProjectImageController::class,
+    'destroy'
+])->name('admin.project-images.destroy');
+
