@@ -1755,44 +1755,56 @@
                     <article class="home-project-card">
 
 
-                        {{-- PROJECT IMAGE --}}
+{{-- PROJECT IMAGE --}}
 
-                        <div class="home-project-image">
+<div class="home-project-image">
 
-                            @if($project->featured_image)
-<img
-    src="{{ asset('storage/' . $project->featured_image) }}"
-    alt="{{ $project->title }}"
-    class="project-image"
-    loading="lazy"
->
+    @if($project->featured_image)
 
-                            @else
+        @php
+            $imagePath = ltrim($project->featured_image, '/');
 
-                                <div class="home-project-placeholder">
+            // Prevent storage/storage/ in the generated URL.
+            if (str_starts_with($imagePath, 'storage/')) {
+                $imagePath = substr($imagePath, strlen('storage/'));
+            }
 
-                                    <i class="bi bi-code-square"></i>
+            $imageUrl = asset('storage/' . $imagePath);
+        @endphp
 
-                                    Project Preview
+        <img
+            src="{{ $imageUrl }}"
+            alt="{{ $project->title }}"
+            loading="lazy"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
 
-                                </div>
+        <div
+            class="home-project-placeholder"
+            style="display: none;"
+        >
+            <i class="bi bi-image"></i>
+            Image unavailable
+        </div>
 
-                            @endif
+    @else
 
+        <div class="home-project-placeholder">
+            <i class="bi bi-code-square"></i>
+            Project Preview
+        </div>
 
-                            @if($project->is_featured)
+    @endif
 
-                                <span class="home-featured-badge">
+    @if($project->is_featured)
+        <span class="home-featured-badge">
+            <i class="bi bi-star-fill me-1"></i>
+            Featured
+        </span>
+    @endif
 
-                                    <i class="bi bi-star-fill me-1"></i>
+</div>
 
-                                    Featured
-
-                                </span>
-
-                            @endif
-
-                        </div>
 
 
                         {{-- PROJECT CONTENT --}}
