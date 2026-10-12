@@ -1760,11 +1760,12 @@
                         <div class="home-project-image">
 
                             @if($project->featured_image)
-
-                                <img
-                                    src="{{ asset('storage/' . $project->featured_image) }}"
-                                    alt="{{ $project->title }}"
-                                >
+<img
+    src="{{ asset('storage/' . $project->featured_image) }}"
+    alt="{{ $project->title }}"
+    class="project-image"
+    loading="lazy"
+>
 
                             @else
 
