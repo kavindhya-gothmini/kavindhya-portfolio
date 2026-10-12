@@ -1758,44 +1758,32 @@
 {{-- PROJECT IMAGE --}}
 
 
+
 <div class="home-project-image">
     @if ($project->featured_image)
         @php
             $imagePath = ltrim($project->featured_image, '/');
 
             if (str_starts_with($imagePath, 'storage/')) {
-                $imagePath = substr($imagePath, strlen('storage/'));
+                $imagePath = substr($imagePath, 8);
             }
 
             $imageUrl = asset('storage/' . $imagePath);
         @endphp
 
+        <p style="font-size: 12px; overflow-wrap: anywhere;">
+            Image URL: {{ $imageUrl }}
+        </p>
+
         <img
             src="{{ $imageUrl }}"
             alt="{{ $project->title }}"
-            loading="lazy"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            style="width: 100%; height: 205px; object-fit: cover;"
         >
-
-        <div class="home-project-placeholder" style="display: none;">
-            <i class="bi bi-image"></i>
-            Image unavailable
-        </div>
     @else
-        <div class="home-project-placeholder">
-            <i class="bi bi-code-square"></i>
-            Project Preview
-        </div>
-    @endif
-
-    @if ($project->is_featured)
-        <span class="home-featured-badge">
-            <i class="bi bi-star-fill me-1"></i>
-            Featured
-        </span>
+        <p>No image path in database.</p>
     @endif
 </div>
-
 
 
 
